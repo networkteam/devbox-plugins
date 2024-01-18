@@ -1,0 +1,23 @@
+version: "0.5"
+
+processes:
+  # Override postgresql service to include a health-check and depend on init
+  postgresql:
+    command: "pg_ctl start -o \"-k $PGHOST\""
+    is_daemon: true
+    shutdown:
+      command: "pg_ctl stop -m fast"
+    availability:
+      restart: "always"
+    readiness_probe:
+      exec:
+        command: psql postgres -c "SELECT 1"
+      initial_delay_seconds: 3
+      period_seconds: 10
+      timeout_seconds: 5
+  # Make sure databases are created after PostgreSQL is started
+  postgresql:createdb:
+    command: $POSTGRESQL_SCRIPTS_DIR/create_db.sh
+    depends_on:
+      postgresql:
+        condition: process_healthy

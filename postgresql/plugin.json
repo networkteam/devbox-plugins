@@ -1,0 +1,19 @@
+{
+  "name": "postgresql",
+  "version": "0.0.1",
+  "readme": "This plugin extends the Devbox PostgreSQL plugin with automatic init of the database and adds a health check to the service.",
+  "create_files": {
+    "{{ .Virtenv }}/init_db.sh": "config/init_db.sh",
+    "{{ .Virtenv }}/create_db.sh": "config/create_db.sh",
+    "{{ .Virtenv }}/process-compose.yaml": "config/process-compose.yaml"
+  },
+  "env": {
+    "POSTGRESQL_SCRIPTS_DIR": "{{ .Virtenv }}"
+  },
+  "shell": {
+    "init_hook": [
+      "bash {{ .Virtenv }}/init_db.sh"
+    ]
+  }
+}
+
