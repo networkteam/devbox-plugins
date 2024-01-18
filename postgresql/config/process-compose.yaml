@@ -17,7 +17,7 @@ processes:
       timeout_seconds: 5
   # Make sure databases are created after PostgreSQL is started
   postgresql:createdb:
-    command: $POSTGRESQL_SCRIPTS_DIR/create_db.sh
+    command: bash $POSTGRESQL_SCRIPTS_DIR/create_db.sh
     depends_on:
       postgresql:
         condition: process_healthy
