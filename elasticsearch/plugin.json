@@ -1,0 +1,27 @@
+{
+  "name": "elasticsearch",
+  "version": "0.0.1",
+  "readme": "This plugin starts an elasticsearch service",
+  "create_files": {
+    "{{ .DevboxDir }}/config/jvm.options": "config/jvm.options",
+    "{{ .DevboxDir }}/config/log4j2.properties": "config/log4j2.properties",
+    "{{ .DevboxDir }}/config/elasticsearch.yml": "config/elasticsearch.yml",
+    "{{ .Virtenv }}/process-compose.yaml": "config/process-compose.yaml"
+  },
+  "env": {
+    "ES_HOME": "{{ .Virtenv }}/",
+    "ES_PATH_CONF": "{{ .DevboxDir }}/config",
+    "ES_LOGGING_PATH": "{{ .Virtenv }}/logs",
+    "ES_DATA_PATH": "{{ .Virtenv }}/data",
+    "ES_JAVA_OPTS": "-Xlog:disable -Xlog:all=warning:stderr:utctime,level,tags -Xlog:gc=debug:stderr:utctime",
+    "ES_HOST": "127.0.0.1",
+    "ES_PORT": "9200"
+  },
+  "shell": {
+    "init_hook": [
+      "ln -sfn {{ .Virtenv }}/../../nix/profile/default/config {{ .Virtenv }}/config",
+      "ln -sfn {{ .Virtenv }}/../../nix/profile/default/modules {{ .Virtenv }}/modules",
+      "ln -sfn {{ .Virtenv }}/../../nix/profile/default/plugins {{ .Virtenv }}/plugins"
+    ]
+  }
+}
