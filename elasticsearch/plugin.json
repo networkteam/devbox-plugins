@@ -13,13 +13,12 @@
     "ES_PATH_CONF": "{{ .DevboxDir }}/config",
     "ES_LOGGING_PATH": "{{ .Virtenv }}/logs",
     "ES_DATA_PATH": "{{ .Virtenv }}/data",
-    "ES_JAVA_OPTS": "-Xlog:disable -Xlog:all=warning:stderr:utctime,level,tags -Xlog:gc=debug:stderr:utctime",
     "ES_HOST": "127.0.0.1",
     "ES_PORT": "9200"
   },
   "shell": {
     "init_hook": [
-      "ln -sfn {{ .Virtenv }}/../../nix/profile/default/config {{ .Virtenv }}/config",
+      "mkdir -p {{ .Virtenv }}/{config,logs}",
       "ln -sfn {{ .Virtenv }}/../../nix/profile/default/modules {{ .Virtenv }}/modules",
       "ln -sfn {{ .Virtenv }}/../../nix/profile/default/plugins {{ .Virtenv }}/plugins"
     ]
