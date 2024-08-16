@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "readme": "This plugin starts an elasticsearch service",
   "create_files": {
+    "{{ .Virtenv }}/config": "",
+    "{{ .Virtenv }}/logs": "",
     "{{ .DevboxDir }}/config/jvm.options": "config/jvm.options",
     "{{ .DevboxDir }}/config/log4j2.properties": "config/log4j2.properties",
     "{{ .DevboxDir }}/config/elasticsearch.yml": "config/elasticsearch.yml",
@@ -18,7 +20,6 @@
   },
   "shell": {
     "init_hook": [
-      "mkdir -p {{ .Virtenv }}/{config,logs}",
       "ln -sfn {{ .Virtenv }}/../../nix/profile/default/modules {{ .Virtenv }}/modules",
       "ln -sfn {{ .Virtenv }}/../../nix/profile/default/plugins {{ .Virtenv }}/plugins"
     ]
