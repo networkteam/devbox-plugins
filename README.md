@@ -7,3 +7,5 @@ Devbox plugins for isolated local dev environments
 ### Postgresql
 
 ### Elasticsearch
+
+### OpenSearch

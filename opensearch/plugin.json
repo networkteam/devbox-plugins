@@ -1,0 +1,28 @@
+{
+  "name": "opensearch",
+  "version": "0.0.1",
+  "readme": "This plugin starts an OpenSearch service",
+  "create_files": {
+    "{{ .Virtenv }}/config": "",
+    "{{ .Virtenv }}/logs": "",
+    "{{ .DevboxDir }}/config/jvm.options": "config/jvm.options",
+    "{{ .DevboxDir }}/config/log4j2.properties": "config/log4j2.properties",
+    "{{ .DevboxDir }}/config/elasticsearch.yml": "config/opensearch.yml",
+    "{{ .Virtenv }}/process-compose.yaml": "config/process-compose.yaml"
+  },
+  "env": {
+    "OPENSEARCH_HOME": "{{ .Virtenv }}/",
+    "OPENSEARCH_PATH_CONF": "{{ .DevboxDir }}/config",
+    "OPENSEARCH_LOGGING_PATH": "{{ .Virtenv }}/logs",
+    "OPENSEARCH_DATA_PATH": "{{ .Virtenv }}/data",
+    "OPENSEARCH_HOST": "127.0.0.1",
+    "OPENSEARCH_PORT": "9200"
+  },
+  "shell": {
+    "init_hook": [
+      "ln -sfn {{ .DevboxProfileDefault }}/lib {{ .Virtenv }}/lib",
+      "ln -sfn {{ .DevboxProfileDefault }}/modules {{ .Virtenv }}/modules",
+      "ln -sfn {{ .DevboxProfileDefault }}/plugins {{ .Virtenv }}/plugins"
+    ]
+  }
+}
